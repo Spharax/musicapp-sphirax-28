@@ -1,0 +1,325 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Proton VPN inspired theme - Light mode */
+    --background: 0 0% 98%;
+    --foreground: 240 9% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 9% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 9% 9%;
+    
+    /* Proton Purple brand colors */
+    --primary: 264 83% 58%;  /* Proton's signature purple */
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 264 83% 53%;
+    --primary-active: 264 83% 48%;
+    
+    /* Clean secondary colors */
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 6% 10%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 46%;
+    --accent: 240 5% 95%;
+    --accent-foreground: 240 6% 10%;
+    
+    /* Status colors - Proton style */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --warning: 25 95% 53%;
+    --warning-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Clean borders */
+    --border: 240 6% 90%;
+    --input: 240 6% 90%;
+    --ring: 264 83% 58%;
+    
+    /* Proton gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(264 83% 58%) 0%, hsl(280 83% 63%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(240 5% 98%) 100%);
+    
+    /* Sidebar colors */
+    --sidebar-background: 240 6% 10%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 264 83% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4% 16%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 240 4% 16%;
+    --sidebar-ring: 264 83% 58%;
+
+    --radius: 8px;
+  }
+
+  .dark {
+    /* Dark mode - Proton VPN inspired */
+    --background: 240 6% 10%;  /* Deep dark background */
+    --foreground: 0 0% 95%;
+    --card: 240 4% 16%;  /* Card background */
+    --card-foreground: 0 0% 95%;
+    --popover: 240 4% 16%;
+    --popover-foreground: 0 0% 95%;
+    
+    /* Proton Purple for dark mode */
+    --primary: 264 83% 65%;  /* Brighter purple for dark mode */
+    --primary-foreground: 240 6% 10%;
+    --primary-hover: 264 83% 70%;
+    --primary-active: 264 83% 75%;
+    
+    /* Dark secondary colors */
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 240 4% 16%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 240 4% 20%;
+    --accent-foreground: 0 0% 95%;
+    
+    /* Status colors for dark */
+    --success: 142 84% 44%;
+    --success-foreground: 240 6% 10%;
+    --warning: 25 95% 60%;
+    --warning-foreground: 240 6% 10%;
+    --destructive: 0 84% 65%;
+    --destructive-foreground: 240 6% 10%;
+    
+    /* Dark borders */
+    --border: 240 4% 20%;
+    --input: 240 4% 20%;
+    --ring: 264 83% 65%;
+    
+    /* Dark gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(264 83% 65%) 0%, hsl(280 83% 70%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(240 4% 16%) 0%, hsl(240 4% 20%) 100%);
+    
+    /* Sidebar colors for dark */
+    --sidebar-background: 240 6% 10%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 264 83% 65%;
+    --sidebar-primary-foreground: 240 6% 10%;
+    --sidebar-accent: 240 4% 20%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 240 4% 20%;
+    --sidebar-ring: 264 83% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    min-height: 100vh;
+  }
+
+  /* Enhanced Animations for Interactive Elements */
+  @keyframes subtle-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+
+  @keyframes gentle-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-2px); }
+  }
+
+  @keyframes wave {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(1.2); }
+  }
+
+  @keyframes neon-pulse {
+    0%, 100% { 
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+      transform: scale(1);
+    }
+    50% { 
+      box-shadow: 0 0 30px hsl(var(--primary) / 0.6);
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes bounce-gentle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  @keyframes slide-up {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-in-right {
+    from { 
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes ripple {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+
+  @keyframes glow-rotate {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+  }
+
+  /* Proton-inspired Utility Classes */
+  .proton-card {
+    background: var(--gradient-card);
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    transition: all 0.2s ease;
+  }
+
+  .proton-card:hover {
+    border-color: hsl(var(--primary) / 0.3);
+    box-shadow: 0 4px 12px hsl(var(--primary) / 0.1);
+  }
+
+  .proton-button {
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: var(--radius);
+    color: hsl(var(--primary-foreground));
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .proton-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
+  }
+
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass-card {
+    background: hsl(var(--card) / 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.5);
+    border-radius: calc(var(--radius) + 2px);
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: var(--radius);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: var(--radius);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.8);
+  }
+
+  /* Interactive Animation Classes */
+  .animate-float {
+    animation: gentle-float 6s ease-in-out infinite;
+  }
+
+  .animate-neon-pulse {
+    animation: neon-pulse 3s ease-in-out infinite;
+  }
+
+  .animate-bounce-gentle {
+    animation: bounce-gentle 2s ease-in-out infinite;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.3s ease-out;
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.3s ease-out;
+  }
+
+  .animate-glow-rotate {
+    animation: glow-rotate 3s linear infinite;
+  }
+
+  .hover-scale {
+    transition: transform 0.2s ease;
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+
+  .hover-lift {
+    transition: all 0.2s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px hsl(var(--primary) / 0.15);
+  }
+
+  .interactive-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+  }
+
+  .interactive-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 40px hsl(var(--primary) / 0.2);
+  }
+
+  .ripple-effect {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ripple-effect::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: hsl(var(--primary) / 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+  }
+
+  .ripple-effect:active::before {
+    width: 300px;
+    height: 300px;
+  }
+}
