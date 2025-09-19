@@ -87,7 +87,7 @@ export const SmartMixCreator: React.FC<SmartMixCreatorProps> = ({
       <Card className="glass-card animate-slide-up">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 gradient-text">
-            <Zap />
+            <Zap className="animate-bounce-gentle" />
             Smart Mix Creator
           </CardTitle>
         </CardHeader>

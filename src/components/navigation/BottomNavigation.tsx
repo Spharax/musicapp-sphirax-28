@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Music, Settings, Library, BarChart3, TrendingUp, Sliders } from 'lucide-react';
+import { Home, Music, Download, Settings, Library, BarChart3 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface BottomNavigationProps {
@@ -11,8 +11,8 @@ const navItems = [
   { id: 'home', icon: Home, label: 'Home' },
   { id: 'library', icon: Library, label: 'Library' },
   { id: 'player', icon: Music, label: 'Player' },
-  { id: 'equalizer', icon: Sliders, label: 'EQ' },
-  { id: 'analytics', icon: TrendingUp, label: 'Stats' },
+  { id: 'equalizer', icon: BarChart3, label: 'EQ' },
+  { id: 'analytics', icon: BarChart3, label: 'Stats' },
   { id: 'settings', icon: Settings, label: 'Settings' },
 ];
 
