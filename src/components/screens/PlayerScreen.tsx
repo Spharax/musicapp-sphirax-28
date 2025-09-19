@@ -11,6 +11,7 @@ import { LyricsDisplay } from '@/components/lyrics/LyricsDisplay';
 import { useMediaLibrary } from '@/hooks/useMediaLibrary';
 import { MediaPlayer } from '@/components/media/MediaPlayer';
 import { WaveformVisualizer } from '@/components/ui/waveform-visualizer';
+import { QueueDisplay } from '@/components/queue/QueueDisplay';
 import { LocalStorage } from '@/utils/localStorage';
 
 export const PlayerScreen: React.FC = () => {
@@ -42,25 +43,7 @@ export const PlayerScreen: React.FC = () => {
           </TabsList>
 
           <TabsContent value="queue" className="animate-slide-up">
-            {/* Queue Preview */}
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold gradient-text">Up Next</h3>
-                <NeonButton variant="glow" size="sm" className="hover-lift">
-                  View Queue
-                </NeonButton>
-              </div>
-              
-              <NeonCard variant="floating" className="animate-slide-up">
-                <CardContent className="p-4">
-                   <div className="text-center py-8 text-muted-foreground">
-                     <Music className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                     <p>No tracks in queue</p>
-                     <p className="text-sm">Add music to see your queue here</p>
-                  </div>
-                </CardContent>
-              </NeonCard>
-            </div>
+            <QueueDisplay />
           </TabsContent>
 
           <TabsContent value="lyrics" className="animate-slide-up">
