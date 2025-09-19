@@ -76,7 +76,7 @@ export const RecentTracks: React.FC<RecentTracksProps> = ({
         <CardContent>
           <div className="space-y-3">
             {[...Array(3)].map((_, i) => (
-              <div key={i} className="flex items-center gap-3 animate-pulse">
+              <div key={i} className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-muted rounded-lg" />
                 <div className="flex-1 space-y-2">
                   <div className="h-4 bg-muted rounded w-3/4" />

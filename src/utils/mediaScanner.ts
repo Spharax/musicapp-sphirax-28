@@ -121,41 +121,8 @@ export class MediaScanner {
   }
 
   private async simulateFileDiscovery(progressCallback?: (progress: number) => void): Promise<void> {
-    // Simulate scanning progress for demo
-    const mockFiles: Partial<AudioFile>[] = [
-      {
-        title: 'Neon Dreams',
-        artist: 'Synthwave Collective',
-        album: 'Digital Horizons',
-        duration: 240,
-        size: 8.5 * 1024 * 1024,
-        format: 'mp3'
-      },
-      {
-        title: 'Electric Pulse',
-        artist: 'Cyber Phoenix',
-        album: 'Binary Beats',
-        duration: 198,
-        size: 6.2 * 1024 * 1024,
-        format: 'mp3'
-      },
-      {
-        title: 'Chrome Velocity',
-        artist: 'Future Bass',
-        album: 'Velocity EP',
-        duration: 275,
-        size: 9.1 * 1024 * 1024,
-        format: 'flac'
-      },
-      {
-        title: 'Digital Storm',
-        artist: 'Neon Horizon',
-        album: 'Storm Front',
-        duration: 320,
-        size: 11.2 * 1024 * 1024,
-        format: 'mp3'
-      }
-    ];
+    // No mock files - real files will be added through file upload or device scanning
+    const mockFiles: Partial<AudioFile>[] = [];
 
     let processed = 0;
     for (const mock of mockFiles) {

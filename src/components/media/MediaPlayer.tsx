@@ -379,11 +379,16 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({
             size="icon"
             onClick={() => setIsShuffling(!isShuffling)}
             className={cn(
-              "w-8 h-8",
-              isShuffling ? 'text-primary' : 'text-muted-foreground hover:text-primary'
+              "w-8 h-8 relative transition-all",
+              isShuffling 
+                ? 'text-primary bg-primary/10 shadow-sm border border-primary/20' 
+                : 'text-muted-foreground hover:text-primary hover:bg-accent/50'
             )}
           >
             <Shuffle size={16} />
+            {isShuffling && (
+              <div className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full" />
+            )}
           </Button>
 
           <Button
@@ -391,13 +396,18 @@ export const MediaPlayer: React.FC<MediaPlayerProps> = ({
             size="icon"
             onClick={() => setRepeatMode(repeatMode === 'none' ? 'all' : repeatMode === 'all' ? 'one' : 'none')}
             className={cn(
-              "w-8 h-8 relative",
-              repeatMode !== 'none' ? 'text-primary' : 'text-muted-foreground hover:text-primary'
+              "w-8 h-8 relative transition-all",
+              repeatMode !== 'none' 
+                ? 'text-primary bg-primary/10 shadow-sm border border-primary/20' 
+                : 'text-muted-foreground hover:text-primary hover:bg-accent/50'
             )}
           >
             <Repeat size={16} />
+            {repeatMode === 'all' && (
+              <div className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full" />
+            )}
             {repeatMode === 'one' && (
-              <span className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full text-[8px] flex items-center justify-center text-primary-foreground">1</span>
+              <span className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full text-[8px] flex items-center justify-center text-primary-foreground font-medium">1</span>
             )}
           </Button>
 

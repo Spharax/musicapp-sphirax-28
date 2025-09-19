@@ -53,27 +53,10 @@ export const PlayerScreen: React.FC = () => {
               
               <NeonCard variant="floating" className="animate-slide-up">
                 <CardContent className="p-4">
-                  <div className="space-y-3">
-                    {[
-                      { title: 'Electric Dreams', artist: 'Synth Masters', duration: '3:45' },
-                      { title: 'Neon Pulse', artist: 'Digital Waves', duration: '4:12' },
-                      { title: 'Cyber Rain', artist: 'Future Sound', duration: '3:28' },
-                    ].map((track, index) => (
-                      <div 
-                        key={index} 
-                        className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted/30 transition-colors hover-lift animate-slide-in-right"
-                        style={{ animationDelay: `${index * 0.1}s` }}
-                      >
-                        <div className="w-8 h-8 bg-gradient-to-r from-primary/20 to-accent/20 rounded-md flex items-center justify-center">
-                          <Music size={14} className="text-primary" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="font-medium text-sm truncate">{track.title}</p>
-                          <p className="text-xs text-muted-foreground truncate">{track.artist}</p>
-                        </div>
-                        <span className="text-xs text-muted-foreground">{track.duration}</span>
-                      </div>
-                    ))}
+                   <div className="text-center py-8 text-muted-foreground">
+                     <Music className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                     <p>No tracks in queue</p>
+                     <p className="text-sm">Add music to see your queue here</p>
                   </div>
                 </CardContent>
               </NeonCard>
@@ -119,7 +102,7 @@ export const PlayerScreen: React.FC = () => {
         <div className="grid grid-cols-2 gap-3">
           <NeonCard variant="glow" className="interactive-card ripple-effect">
             <CardContent className="p-4 text-center">
-              <div className="w-12 h-12 mx-auto mb-2 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center animate-float">
+              <div className="w-12 h-12 mx-auto mb-2 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center">
                 <Heart className="text-white" size={20} />
               </div>
               <h4 className="font-semibold text-sm mb-1">Add to Favorites</h4>
@@ -129,7 +112,7 @@ export const PlayerScreen: React.FC = () => {
           
           <NeonCard variant="plasma" className="interactive-card ripple-effect">
             <CardContent className="p-4 text-center">
-              <div className="w-12 h-12 mx-auto mb-2 bg-gradient-to-r from-accent to-primary rounded-full flex items-center justify-center animate-float" style={{ animationDelay: '0.5s' }}>
+              <div className="w-12 h-12 mx-auto mb-2 bg-gradient-to-r from-accent to-primary rounded-full flex items-center justify-center">
                 <Share className="text-white" size={20} />
               </div>
               <h4 className="font-semibold text-sm mb-1">Share Track</h4>
@@ -145,7 +128,7 @@ export const PlayerScreen: React.FC = () => {
         <NeonCard variant="neon" className="animate-slide-up hover-lift">
           <CardContent className="p-4">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-secondary to-accent rounded-full flex items-center justify-center animate-neon-pulse">
+              <div className="w-10 h-10 bg-gradient-to-r from-secondary to-accent rounded-full flex items-center justify-center">
                 <Headphones className="text-white" size={18} />
               </div>
               <div>

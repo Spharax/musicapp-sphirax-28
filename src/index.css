@@ -253,8 +253,8 @@
     animation: gentle-float 6s ease-in-out infinite;
   }
 
-  .animate-neon-pulse {
-    animation: neon-pulse 3s ease-in-out infinite;
+  .animate-neon-glow {
+    animation: neon-pulse 6s ease-in-out infinite;
   }
 
   .animate-bounce-gentle {

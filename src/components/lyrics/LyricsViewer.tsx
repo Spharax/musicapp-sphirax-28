@@ -97,7 +97,7 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
       setTimeout(() => {
         const sampleLyrics = generateSampleLyrics(currentTrack);
         setPlainLyrics(sampleLyrics);
-        toast.success('Sample lyrics loaded (integrate with lyrics API for real lyrics)');
+        toast.info('Lyrics service not configured');
         setIsLoading(false);
       }, 1000);
     } catch (error) {
@@ -111,11 +111,8 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
     return `${track.title}
 by ${track.artist}
 
-[Verse 1]
-Sample lyrics for demonstration
-This is where the real lyrics would appear
-Integrate with Genius, Musixmatch, or similar API
-To get actual song lyrics
+Lyrics not available
+Connect to a lyrics service to display lyrics for this track.
 
 [Chorus]
 The actual lyrics would sync with the music
