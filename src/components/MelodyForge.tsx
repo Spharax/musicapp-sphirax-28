@@ -3,17 +3,35 @@ import { BottomNavigation } from '@/components/navigation/BottomNavigation';
 import { HomeScreen } from '@/components/screens/HomeScreen';
 import { LibraryScreen } from '@/components/screens/LibraryScreen';
 import { PlayerScreen } from '@/components/screens/PlayerScreen';
+import { EqualizerScreen } from '@/components/screens/EqualizerScreen';
 import { DownloadScreen } from '@/components/screens/DownloadScreen';
 import { SettingsScreen } from '@/components/screens/SettingsScreen';
 import { AnalyticsScreen } from '@/components/screens/AnalyticsScreen';
 import { MediaPlayer } from '@/components/media/MediaPlayer';
 import { OfflineIndicator } from '@/components/offline/OfflineIndicator';
 import { InstallPrompt } from '@/components/pwa/InstallPrompt';
+import { GestureNavigation } from '@/components/enhanced/GestureNavigation';
 import { useMediaLibrary } from '@/hooks/useMediaLibrary';
 
 export const MelodyForge: React.FC = () => {
   const [activeTab, setActiveTab] = useState('home');
   const { currentTrack, playNext, playPrevious } = useMediaLibrary();
+
+  const handleSwipeLeft = () => {
+    // Navigate to next tab
+    const tabs = ['home', 'library', 'player', 'equalizer', 'analytics', 'settings'];
+    const currentIndex = tabs.indexOf(activeTab);
+    const nextIndex = (currentIndex + 1) % tabs.length;
+    setActiveTab(tabs[nextIndex]);
+  };
+
+  const handleSwipeRight = () => {
+    // Navigate to previous tab
+    const tabs = ['home', 'library', 'player', 'equalizer', 'analytics', 'settings'];
+    const currentIndex = tabs.indexOf(activeTab);
+    const prevIndex = currentIndex === 0 ? tabs.length - 1 : currentIndex - 1;
+    setActiveTab(tabs[prevIndex]);
+  };
 
   const renderScreen = () => {
     switch (activeTab) {
@@ -23,6 +41,8 @@ export const MelodyForge: React.FC = () => {
         return <LibraryScreen />;
       case 'player':
         return <PlayerScreen />;
+      case 'equalizer':
+        return <EqualizerScreen />;
       case 'download':
         return <DownloadScreen />;
       case 'analytics':
@@ -35,7 +55,11 @@ export const MelodyForge: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <GestureNavigation
+      onSwipeLeft={handleSwipeLeft}
+      onSwipeRight={handleSwipeRight}
+      className="min-h-screen bg-background"
+    >
       {/* Offline Indicator */}
       <OfflineIndicator />
       
@@ -65,6 +89,6 @@ export const MelodyForge: React.FC = () => {
         activeTab={activeTab}
         onTabChange={setActiveTab}
       />
-    </div>
+    </GestureNavigation>
   );
 };
