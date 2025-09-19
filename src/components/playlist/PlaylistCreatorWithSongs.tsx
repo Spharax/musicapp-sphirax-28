@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LocalStorage, Playlist } from '@/utils/localStorage';
+import { musicDB, Playlist } from '@/utils/musicDatabase';
 import { useMediaLibrary, Track } from '@/hooks/useMediaLibrary';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
@@ -28,14 +28,17 @@ export const PlaylistCreatorWithSongs: React.FC<PlaylistCreatorWithSongsProps> =
   const { audioFiles, getRecentTracks, getTopTracks } = useMediaLibrary();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [selectedColor, setSelectedColor] = useState(LocalStorage.getColorTags()[0]);
+  const [selectedColor, setSelectedColor] = useState('#3B82F6');
   const [selectedTracks, setSelectedTracks] = useState<Set<string>>(new Set());
   const [searchQuery, setSearchQuery] = useState('');
   const [isCreating, setIsCreating] = useState(false);
   const [recentTracks, setRecentTracks] = useState<Track[]>([]);
   const [topTracks, setTopTracks] = useState<Track[]>([]);
 
-  const colorTags = LocalStorage.getColorTags();
+  const colorTags = [
+    '#3B82F6', '#EF4444', '#10B981', '#F59E0B', 
+    '#8B5CF6', '#EC4899', '#06B6D4', '#84CC16'
+  ];
 
   // Load data on mount
   useEffect(() => {
@@ -44,8 +47,8 @@ export const PlaylistCreatorWithSongs: React.FC<PlaylistCreatorWithSongsProps> =
       if (existingPlaylist) {
         setName(existingPlaylist.name);
         setDescription(existingPlaylist.description || '');
-        setSelectedColor(existingPlaylist.colorTag);
-        setSelectedTracks(new Set(existingPlaylist.trackIds));
+        setSelectedColor(existingPlaylist.color);
+        setSelectedTracks(new Set(existingPlaylist.songs));
       }
     }
   }, [isOpen, existingPlaylist]);
@@ -99,20 +102,23 @@ export const PlaylistCreatorWithSongs: React.FC<PlaylistCreatorWithSongsProps> =
         ...existingPlaylist,
         name: name.trim(),
         description: description.trim() || undefined,
-        colorTag: selectedColor,
+        color: selectedColor,
+        songs: Array.from(selectedTracks),
         trackIds: Array.from(selectedTracks),
-        updatedAt: new Date()
+        lastModified: new Date()
       } : {
         id: `playlist_${Date.now()}_${Math.random()}`,
         name: name.trim(),
         description: description.trim() || undefined,
-        colorTag: selectedColor,
+        color: selectedColor,
+        songs: Array.from(selectedTracks),
         trackIds: Array.from(selectedTracks),
         createdAt: new Date(),
-        updatedAt: new Date()
+        dateCreated: new Date(),
+        lastModified: new Date()
       };
 
-      LocalStorage.savePlaylist(playlist);
+      await musicDB.createPlaylist(playlist);
       
       toast.success(`Playlist "${name}" ${existingPlaylist ? 'updated' : 'created'} successfully!`);
       onPlaylistCreated(playlist);
@@ -128,7 +134,7 @@ export const PlaylistCreatorWithSongs: React.FC<PlaylistCreatorWithSongsProps> =
   const handleClose = () => {
     setName('');
     setDescription('');
-    setSelectedColor(colorTags[0]);
+    setSelectedColor('#3B82F6');
     setSelectedTracks(new Set());
     setSearchQuery('');
     onClose();

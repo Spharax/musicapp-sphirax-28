@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Play, Pause, SkipBack, SkipForward, Heart, Shuffle, Repeat } from 'lucide-react';
+import { Play, Pause, SkipBack, SkipForward, Heart, Shuffle, Repeat, Music } from 'lucide-react';
 import { NeonButton } from '@/components/ui/neon-button';
 import { NeonCard } from '@/components/ui/neon-card';
 import { WaveformVisualizer } from '@/components/ui/waveform-visualizer';
@@ -28,28 +28,38 @@ export const HeroPlayer: React.FC = () => {
     }
   };
 
-  // Use current track or fallback to placeholder
-  const displayTrack = currentTrack || {
-    id: 'placeholder',
-    title: 'No Track Selected',
-    artist: 'Select a song to start playing',
-    album: 'Your Music Library',
-    duration: 0,
-    filePath: '',
-    albumArt: undefined,
-    playCount: 0,
-    size: 0,
-    dateAdded: new Date(),
-    genre: 'Unknown'
-  };
+  // Use current track or show empty state
+  const displayTrack = currentTrack;
 
-  const progressPercentage = displayTrack.duration > 0 ? (currentTime / displayTrack.duration) * 100 : 0;
+  const progressPercentage = displayTrack?.duration && displayTrack.duration > 0 ? (currentTime / displayTrack.duration) * 100 : 0;
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
+
+  if (!displayTrack) {
+    return (
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-background/90 via-background/70 to-background/90" />
+        
+        <NeonCard variant="hero" className="relative mx-4 mt-6 mb-4">
+          <div className="p-6">
+            <div className="flex flex-col items-center mb-6">
+              <div className="text-center py-16">
+                <div className="w-32 h-32 mx-auto mb-6 bg-primary/10 rounded-2xl flex items-center justify-center">
+                  <Music className="w-16 h-16 text-primary/50" />
+                </div>
+                <h2 className="text-xl font-semibold mb-2 text-muted-foreground">No Track Selected</h2>
+                <p className="text-muted-foreground">Select a song from your library to start playing</p>
+              </div>
+            </div>
+          </div>
+        </NeonCard>
+      </div>
+    );
+  }
 
   return (
     <div className="relative overflow-hidden">
@@ -118,7 +128,7 @@ export const HeroPlayer: React.FC = () => {
 
             {/* Control Buttons */}
             <div className="flex items-center justify-center gap-4 mb-4">
-              <NeonButton variant="floating" size="floating" className="hover-lift animate-bounce-gentle">
+              <NeonButton variant="floating" size="floating" className="hover-lift">
                 <Shuffle size={18} />
               </NeonButton>
               
@@ -157,7 +167,7 @@ export const HeroPlayer: React.FC = () => {
                 <SkipForward size={20} />
               </NeonButton>
               
-              <NeonButton variant="floating" size="floating" className="hover-lift animate-bounce-gentle" style={{ animationDelay: '1s' }}>
+              <NeonButton variant="floating" size="floating" className="hover-lift">
                 <Repeat size={18} />
               </NeonButton>
             </div>
@@ -170,11 +180,11 @@ export const HeroPlayer: React.FC = () => {
                 onClick={() => setIsLiked(!isLiked)}
                 className={cn(
                   "hover-lift ripple-effect transition-all duration-300",
-                  isLiked && "text-accent border-accent hover:bg-accent hover:text-accent-foreground animate-bounce-gentle"
+                  isLiked && "text-accent border-accent hover:bg-accent hover:text-accent-foreground"
                 )}
               >
                 <Heart size={18} className={cn(
-                  isLiked ? "fill-current animate-bounce-gentle" : "",
+                  isLiked ? "fill-current" : "",
                   "transition-all duration-300"
                 )} />
               </NeonButton>
